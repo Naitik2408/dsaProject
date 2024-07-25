@@ -1,0 +1,69 @@
+### Binary Search Tree (BST) Implementation Explanation and Procedure
+
+#### Introduction
+
+A Binary Search Tree (BST) is a hierarchical data structure where each node has at most two children, referred to as the left and right children. It maintains a specific ordering property: for any given node, values in the left subtree are less than the node's value, and values in the right subtree are greater.
+
+#### Structure: Node Definition
+
+The `Node` structure holds an integer value (`int data`) and pointers to its left and right children (`Node* left`, `Node* right`):
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+#### Class: BST Operations
+
+The `BST` class encapsulates the operations that can be performed on the BST:
+
+- **Insertion (`void insert(int val)`)**: Inserts a new node with value `val` into the BST while maintaining its binary search tree properties.
+  
+- **Deletion (`void deleteNode(int val)`)**: Removes the node with value `val` from the BST, handling cases for nodes with zero, one, or two children.
+  
+- **Searching (`bool search(int val)`)**: Searches for a node with value `val` in the BST. Returns true if the value is found, false otherwise.
+  
+- **Traversal Methods**: 
+  - **Inorder (`void inorder()`)**: Traverses the BST in ascending order (left subtree, node itself, right subtree).
+  - **Preorder (`void preorder()`)**: Traverses the BST by visiting the node first, then the left and right subtrees recursively.
+  - **Postorder (`void postorder()`)**: Traverses the BST by visiting the left and right subtrees recursively first, then the node itself.
+
+#### Insertion Procedure
+
+The `insert` method starts at the root of the BST:
+- If the tree is empty, it creates a new node and sets it as the root.
+- If the tree is not empty, it compares the new value with the current node's value.
+  - If the new value is less than the current node's value, it recursively inserts into the left subtree.
+  - If the new value is greater than the current node's value, it recursively inserts into the right subtree.
+  
+#### Deletion Procedure
+
+The `deleteNode` method:
+- Searches for the node with the value to be deleted.
+- Handles different cases:
+  - If the node has no children, it simply removes the node.
+  - If the node has one child, it links the parent node directly to the child.
+  - If the node has two children, it finds the inorder successor (smallest node in the right subtree), replaces the node's value with the successor's value, and recursively deletes the successor node.
+
+#### Searching Procedure
+
+The `search` method:
+- Starts at the root and compares the value with each node:
+  - If the value matches the node's value, returns true.
+  - If the value is less than the node's value, recursively searches in the left subtree.
+  - If the value is greater than the node's value, recursively searches in the right subtree.
+- Returns false if the value is not found in the BST.
+
+#### Traversal Procedures
+
+- **Inorder Traversal**: Calls `inorderRec` starting from the root. This recursively traverses the left subtree, visits the node, then recursively traverses the right subtree, producing nodes in sorted order.
+  
+- **Preorder Traversal**: Calls `preorderRec` starting from the root. This visits the node first, then recursively traverses the left and right subtrees.
+  
+- **Postorder Traversal**: Calls `postorderRec` starting from the root. This recursively traverses the left and right subtrees first, then visits the node.
+
+#### Conclusion
+
+The BST data structure provides efficient operations for insertion, deletion, and searching, with traversal methods that allow access to elements in sorted order or in a specified order. Understanding these procedures is crucial for effectively utilizing BSTs in applications requiring dynamic data management and retrieval based on ordering constraints.
